@@ -10,12 +10,12 @@ class StudentController extends Controller
     protected $student;
     
     public function _construct(){
-        $this -> student = new Student();
+        $this->student = new Student();
     }
 
     public function index()
     {
-       return $this->student->all();
+       return $this->students->all();
     }
 
     /**
@@ -23,7 +23,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       return $this->student->create($request->all());
     }
 
     /**
@@ -31,7 +31,7 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = $this->student->find($id);  //
     }
 
     /**
@@ -39,7 +39,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = $this->student->find($id);
+        $student->update($request->all());
+        return $student;
     }
 
     /**
@@ -47,6 +49,7 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = $this->student->find($id);
+        return $student->delete();
     }
 }
